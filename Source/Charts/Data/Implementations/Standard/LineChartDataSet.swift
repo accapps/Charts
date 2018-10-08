@@ -71,6 +71,9 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     /// The radius of the drawn circles.
     open var circleRadius = CGFloat(8.0)
     
+    //The width of the border drawn around the circles
+    open var circleBorderWidth = CGFloat(2.0)
+    
     /// The hole radius of the drawn circles
     open var circleHoleRadius = CGFloat(4.0)
     
@@ -118,8 +121,17 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     /// The color of the inner circle (the circle-hole).
     open var circleHoleColor: NSUIColor? = NSUIColor.white
     
+    //The color of the outer border of a circle
+    open var circleBorderColor: NSUIColor? = NSUIColor.white
+    
     /// `true` if drawing circles for this DataSet is enabled, `false` ifnot
     open var drawCircleHoleEnabled = true
+    
+    /// `true` if drawing circle borders for this DataSet is enabled, `false` if not
+    open var drawCircleBorderEnabled = false
+    
+    /// - returns: `true` if drawing the circle-border is enabled, `false` ifnot.
+    open var isDrawCircleBorderEnabled: Bool { return drawCircleBorderEnabled }
     
     /// - returns: `true` if drawing the circle-holes is enabled, `false` ifnot.
     open var isDrawCircleHoleEnabled: Bool { return drawCircleHoleEnabled }
@@ -158,12 +170,14 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
         let copy = super.copyWithZone(zone) as! LineChartDataSet
         copy.circleColors = circleColors
         copy.circleRadius = circleRadius
+        copy.circleBorderWidth = circleBorderWidth
         copy.cubicIntensity = cubicIntensity
         copy.lineDashPhase = lineDashPhase
         copy.lineDashLengths = lineDashLengths
         copy.lineCapType = lineCapType
         copy.drawCirclesEnabled = drawCirclesEnabled
         copy.drawCircleHoleEnabled = drawCircleHoleEnabled
+        copy.drawCircleBorderEnabled = drawCircleBorderEnabled
         copy.mode = mode
         return copy
     }

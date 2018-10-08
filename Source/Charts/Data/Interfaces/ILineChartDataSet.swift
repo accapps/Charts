@@ -36,6 +36,9 @@ public protocol ILineChartDataSet: ILineRadarChartDataSet
     /// The hole radius of the drawn circles.
     var circleHoleRadius: CGFloat { get set }
     
+    /// The border width of the drawn circles.
+    var circleBorderWidth: CGFloat { get set }
+    
     var circleColors: [NSUIColor] { get set }
     
     /// - returns: The color at the given index of the DataSet's circle-color array.
@@ -58,11 +61,20 @@ public protocol ILineChartDataSet: ILineRadarChartDataSet
     /// The color of the inner circle (the circle-hole).
     var circleHoleColor: NSUIColor? { get set }
     
+    /// The color of the outer border of the circle.
+    var circleBorderColor: NSUIColor? { get set }
+    
     /// `true` if drawing circles for this DataSet is enabled, `false` ifnot
     var drawCircleHoleEnabled: Bool { get set }
     
     /// - returns: `true` if drawing the circle-holes is enabled, `false` ifnot.
     var isDrawCircleHoleEnabled: Bool { get }
+    
+    /// `true` if drawing circles for this DataSet is enabled, `false` ifnot
+    var drawCircleBorderEnabled: Bool { get set }
+    
+    /// - returns: `true` if drawing the circle-border is enabled, `false` ifnot.
+    var isDrawCircleBorderEnabled: Bool { get }
     
     /// This is how much (in pixels) into the dash pattern are we starting from.
     var lineDashPhase: CGFloat { get }
