@@ -581,6 +581,7 @@ open class LineChartRenderer: LineRadarRenderer
             let circleRadius = dataSet.circleRadius
             let circleDiameter = circleRadius * 2.0
             let circleHoleRadius = dataSet.circleHoleRadius
+            let circleBorderRadius = dataSet.circleRadius + (dataSet.circleBorderWidth / 2)
             let circleHoleDiameter = circleHoleRadius * 2.0
             
             let drawCircleHole = dataSet.isDrawCircleHoleEnabled &&
@@ -589,6 +590,7 @@ open class LineChartRenderer: LineRadarRenderer
             let drawTransparentCircleHole = drawCircleHole &&
                 (dataSet.circleHoleColor == nil ||
                     dataSet.circleHoleColor == NSUIColor.clear)
+            let drawCircleBorder = dataSet.isDrawCircleBorderEnabled && circleBorderRadius > 0.0 && circleBorderRadius > circleRadius
             
             for j in _xBounds
             {
@@ -663,6 +665,13 @@ open class LineChartRenderer: LineRadarRenderer
                 else
                 {
                     context.fillEllipse(in: rect)
+                    
+                    if drawCircleBorder {
+                        context.setStrokeColor(dataSet.circleBorderColor!.cgColor)
+                        context.setLineWidth(dataSet.circleBorderWidth)
+                        context.addEllipse(in: rect)
+                        context.drawPath(using: .fillStroke)
+                    }
                     
                     if drawCircleHole
                     {
